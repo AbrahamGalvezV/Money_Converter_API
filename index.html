@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Money transform</title>
+  </head>
+  <body>
+    <section class="transform">
+      <div class="container">
+        <div class="transform__wrapper">
+          <div class="transform__item">
+            <p class="transform__item__title" id="">Send</p>
+
+            <div class="transform__item__wrapper">
+              <input
+                type="number"
+                id="number"
+                class="transform__input"
+                placeholder="Enter temperature"
+              />
+              <select
+                name="unitSelector"
+                id="selectorValue1"
+                class="transform__select"
+              >
+                <option value="eur">Euro €</option>
+                <option value="usd">Dollars $</option>
+                <option value="jpy">Japan Yen ¥</option>
+                <option value="gbp">British Pound £</option>
+                <option value="chf">Swiss Francs </option>
+                <option value="krw">South Korean Won ₩</option>
+              </select>
+            </div>
+          </div>
+          <div class="transform__item">
+            <p class="transform__item__title" id="">Result</p>
+            <div class="transform__item__wrapper">
+              <p class="transform__text" id="result">0</p>
+              <select name="" id="selectorValue2" class="transform__select">
+                <option value="eur">Euro €</option>
+                <option value="usd">Dollars $</option>
+                <option value="jpy">Japan Yen ¥</option>
+                <option value="gbp">British Pound £</option>
+                <option value="chf">Swiss Francs </option>
+                <option value="krw">South Korean Won ₩</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./main/calculadora.js"></script>
+  </body>
+</html>
