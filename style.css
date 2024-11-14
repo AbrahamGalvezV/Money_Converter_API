@@ -24,7 +24,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    font-family: "Quicksand", serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 body:before {
