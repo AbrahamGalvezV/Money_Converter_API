@@ -1,9 +1,8 @@
-# 🪙 Conversor de monedas 🪙
+# 🪙 Conversor de monedas API 🪙
 
 ## 📜 Sobre el proyecto 
 
-Este proyecto es una aplicación web de conversión de divisas que permite convertir entre Euro, Dólar, Yen japonés, Libra esterlina, Franco suizo y Won surcoreano. Ofrece un diseño simple e intuitivo para ingresar un monto en una moneda y obtener la conversión a otra.
-
+Se trata de un conversor de divisas en línea que permite a los usuarios convertir cantidades de una moneda a otra de manera rápida y sencilla. Utiliza la API de Exchangerate-API para obtener los códigos de las monedas y las tasas de cambio actualizadas en tiempo real. La interfaz está diseñada para ser intuitiva, proporcionando una experiencia de usuario amigable y directa.
 
 ## 🛠️ Stack 
 
@@ -22,31 +21,38 @@ Supongamos que quieres convertir 100 Euros a Dólares:
 
 Este proceso es posible gracias a la lógica implementada en el archivo calculadora.js, que utiliza las tasas de conversión actuales y fórmulas matemáticas para calcular los valores de forma precisa.
 
+¡Te animo a que pruebes como funciona! [Pincha aquí para acceder](https://abrahamgalvezv.github.io/Money_Converter_API/)
+
 ## 🧮 Fórmulas de conversión
 
-+ De Euro a Dólar: USD = EUR × 1.08
-const dollars = Math.floor(number * 1.08);
-
-+ De Euro a Yen Japonés: JPY = EUR × 165.94
-const yenes = Math.floor(number * 165.94);
-
-+ De Euro a Libra Esterlina: GBP = EUR × 0.90
-const pounds = Math.floor(number * 0.90);
-
-+ De Euro a Franco Suizo: CHF = EUR × 1.07
-const francs = Math.floor(number * 1.07);
-
-+ De Euro a Won Surcoreano: KRW = EUR × 1462.10
-const wones = Math.floor(number * 1462.10);
+El cálculo de la conversión se realiza de la siguiente manera:
 
 He decidido usar la condicional if else para esta función
-![Imagen de la aplicación convirtiendo de Celsius a Fahrenheit](./img/ifEls.png)
+![Imagen de la aplicación convirtiendo de Celsius a Fahrenheit](./img/code.png)
 
-## 💻 ¿Quieres comprobar esta función? 
+- amount es la cantidad ingresada por el usuario que desea convertir.
 
-- [Visita el Conversor de monedas](https://abrahamgalvezv.github.io/Money_Converter/)
-- Clona este repositorio en tu equipo y comprueba cómo está creado
-- Implementa esta función en tu proyecto 
+- changeRate es la tasa de cambio proporcionada por la API, que representa la equivalencia entre la moneda de origen y la moneda de destino.
+
+El resultado de la conversión se almacena en la constante result, que es el producto de la cantidad introducida por el usuario y la tasa de cambio obtenida. Posteriormente, este valor se muestra en la interfaz con un formato de dos decimales para facilitar la lectura y garantizar la precisión en la visualización.
+
+## 💻 Instalación y Configuración 
+
+1. Clonar el repositorio; git clone https://github.com/usuario/repo-conversor.git
+
+2. Abrir el archivo HTML: Navegar hasta la carpeta del proyecto y abrir index.html en un navegador.
+
+3. Conexión con la API: Asegúrese de que la API de Exchangerate-API esté accesible y que el enlace de la API tenga una clave de acceso válida.
+
+## 🔝 Mejoras Potenciales
+
+- 📲 Interfaz responsiva: Asegurar que el diseño sea completamente responsivo en dispositivos móviles.
+
+- 📈 Agregar más funcionalidades: Como la posibilidad de ver gráficos de variación de las tasas de cambio.
+
+## 📜 Créditos
+
+Este proyecto fue desarrollado como un ejemplo de cómo integrar una API externa en una aplicación web sencilla para realizar conversiones de divisas. Gracias a la API de Exchangerate-API para proporcionar tasas de cambio precisas y actualizadas.
 
 ## 📭 Contacto 
 
