@@ -1,228 +1,91 @@
-function convertTemperature() {
-  const number = parseFloat(document.getElementById("number").value);
-  const value1 = document.getElementById("selectorValue1").value;
-  const value2 = document.getElementById("selectorValue2").value;
+// Función para obtener la lista de divisas y llenar los selectores
+async function llenarSelectores() {
+  try {
+      // URL de la API con tu clave de API
+      const respuesta = await fetch('https://v6.exchangerate-api.com/v6/3aac3354aab9d55f5d183ccf/codes');
+      // console.log(respuesta);
+      
+      const datos = await respuesta.json();
+      // console.log(datos, 'datos');
+      
 
-  // Verificamos que el numero ha sido ingresado
-  if (isNaN(number)) {
-    document.getElementById("result").textContent =
-      "Please enter a numerical value";
-    return;
+      // Verifica si la respuesta es exitosa
+      if (datos.result === "success") {
+          const simbolos = datos.supported_codes;
+
+          // console.log(simbolos);
+          
+
+          // Selecciona los elementos <select> en el DOM
+          const selector1 = document.getElementById("selectorValue1");
+          const selector2 = document.getElementById("selectorValue2");
+
+          // Limpia los selectores antes de llenarlos
+          selector1.innerHTML = '';
+          selector2.innerHTML = '';
+
+          // Recorre los símbolos y crea opciones para los selectores
+          simbolos.forEach(([codigo, descripcion]) => {
+              const opcion1 = document.createElement('option');
+              opcion1.value = codigo;
+              opcion1.textContent = `${codigo} - ${descripcion}`;
+              selector1.appendChild(opcion1);
+
+              
+
+              const opcion2 = document.createElement('option');
+              opcion2.value = codigo;
+              opcion2.textContent = `${codigo} - ${descripcion}`;
+              selector2.appendChild(opcion2);
+          });
+      } else {
+          console.error('Error al obtener los símbolos de las divisas:', datos);
+      }
+  } catch (error) {
+      console.error('Error al realizar la solicitud de símbolos:', error);
   }
-
-  // Calculamos y mostramos el resultado según el valor seleccionado
-  let result = "";
-
-  if (value1 === "eur") { // Si se introducen celsius en el box 1
-
-    if (value2 === "usd") { // Si se introducen celsius en el box 2
-      const dollars = Math.floor(number * 1.08);
-      result = `${number} € is ${dollars} $`;
-    } 
-    
-    else if (value2 === "jpy") {
-      const yenes = Math.floor(number * 165.94);
-      result = `${number} € is ${yenes} ¥`;
-    } 
-    
-    else if (value2 === "gbp") {
-      const yenes = Math.floor(number * 0.90);
-      result = `${number} € is ${yenes} £`;
-    } 
-    
-    else if (value2 === "chf") {
-      const francs = Math.floor(number * 1.07);
-      result = `${number} € is ${francs} Swiss Francs`;
-    }     
-    
-    else if (value2 === "krw") {
-      const wones = Math.floor(number * 1462.10);
-      result = `${number} € is ${wones} ₩`;
-    } 
-    
-    else {
-      result = `${number} €`;
-    }
-
-  } 
-  
-  else if (value1 === "usd") { // Si se introducen dolares en el box 1
-
-    if (value2 === "eur") { 
-      const euro = Math.floor(number * 0.92);
-      result = `${number} $ is ${euro} €`;
-    } 
-    
-    else if (value2 === "jpy") {
-      const yenes = Math.floor(number * 153.83);
-      result = `${number} $ is ${yenes} ¥`;
-    } 
-    
-    else if (value2 === "gbp") {
-      const libras = Math.floor(number * 0.83);
-      result = `${number} $ is ${libras} £`;
-    } 
-    
-    else if (value2 === "chf") {
-      const francs = Math.floor(number * 0.99);
-      result = `${number} $ is ${francs} Swiss Francs`;
-    } 
-    
-    else if (value2 === "krw") {
-      const wones = Math.floor(number * 1354.40);
-      result = `${number} $ is ${wones} ₩`;
-    } 
-    
-    else {
-      result = `${number} $`;
-    }
-
-  } 
-  
-  else if (value1 === "jpy"){
-
-    if (value2 === "eur") { 
-      const euro = Math.floor(number * 0.006);
-      result = `${number} ¥ is ${euro} €`;
-    }  
-    
-    else if (value2 === "usd") { 
-      const dollars = Math.floor(number * 0.0065);
-      result = `${number} ¥ is ${dollars} $`;
-    } 
-
-    else if (value2 === "gbp") {
-      const libras = Math.floor(number * 0.0054);
-      result = `${number} $ is ${libras} £`;
-    } 
-
-    else if (value2 === "chf") {
-      const francs = Math.floor(number * 0.0065);
-      result = `${number} ¥ is ${francs} Swiss Francs`;
-    } 
-    
-    else if (value2 === "krw") {
-      const wones = Math.floor(number * 8.80);
-      result = `${number} ¥ is ${wones} ₩`;
-    } 
-    
-    else {
-      result = `${number} ¥`;
-    }
-
-  } 
-  
-  else if (value1 === "gbp") {
-
-    if (value2 === "eur") { 
-      const euro = Math.floor(number * 1.11);
-      result = `${number} £ is ${euro} €`;
-    }  
-    
-    else if (value2 === "usd") { 
-      const dollars = Math.floor(number * 1.20);
-      result = `${number} £ is ${dollars} $`;
-    } 
-
-    else if (value2 === "jpy") {
-      const yenes = Math.floor(number * 179.03);
-      result = `${number} $ is ${yenes} ¥`;
-    } 
-
-    else if (value2 === "chf") {
-      const francs = Math.floor(number * 1.15);
-      result = `${number} £ is ${francs} Swiss Francs`;
-    } 
-    
-    else if (value2 === "krw") {
-      const wones = Math.floor(number * 1569.85);
-      result = `${number} £ is ${wones} ₩`;
-    } 
-    
-    else {
-      result = `${number} £`;
-    }
-
-  } 
-  
-  else if (value1 === "chf") {
-
-    if (value2 === "eur") { 
-      const euro = Math.floor(number * 0.94);
-      result = `${number} Swiss Francs is ${euro} €`;
-    }  
-    
-    else if (value2 === "usd") { 
-      const dollars = Math.floor(number * 1.01);
-      result = `${number} Swiss Francs is ${dollars} $`;
-    } 
-
-    else if (value2 === "jpy") {
-      const yens = Math.floor(number * 155.48);
-      result = `${number} Swiss Francs is ${yens} ¥`;
-    } 
-
-    else if (value2 === "gbp") {
-      const libras = Math.floor(number * 0.87);
-      result = `${number} Swiss Francs is ${libras} £`;
-    } 
-
-    else if (value2 === "krw") {
-      const wones = Math.floor(number * 1372.65);
-      result = `${number} Swiss Francs is ${wones} ₩`;
-    } 
-    
-    else {
-      result = `${number} Swiss Francs`;
-    }
-
-  } 
-  
-  else if (value1 === "krw") {
-
-    if (value2 === "eur") { 
-      const euros = Math.floor(number * 0.00068);
-      result = `${number} KRW is ${euros} €`;
-    }  
-    
-    else if (value2 === "usd") { 
-      const dollars = Math.floor(number * 0.00074);
-      result = `${number} KRW is ${dollars} $`;
-    } 
-
-    else if (value2 === "jpy") {
-      const yens = Math.floor(number * '0.11');
-      result = `${number} KRW is ${yens} ¥`;
-    } 
-
-    else if (value2 === "gbp") {
-      const libras = Math.floor(number * 0.00011);
-      result = `${number} KRW is ${libras} £`;
-    }  
-
-    else if (value2 === "chf") {
-      const francs = Math.floor(number * 0.00073);
-      result = `${number} £ is ${francs} Francos Suizos`;
-    }
-    
-    else {
-      result = `${number} South Korean Won`;
-    }
-
-  } 
-  
-  else {
-    result = `The entered value is not defined`;
-  }
-
-  document.getElementById("result").textContent = result;
 }
 
-// Asignamos los eventos a los selectores y al input
-document
-  .getElementById("selectorValue1")
-  .addEventListener("change", convertTemperature);
-document
-  .getElementById("selectorValue2")
-  .addEventListener("change", convertTemperature);
-document.getElementById("number").addEventListener("input", convertTemperature);
+// Llama a la función para llenar los selectores al cargar la página
+document.addEventListener('DOMContentLoaded', llenarSelectores);
+
+// Función para obtener y mostrar la tasa de cambio
+async function obtenerTasaCambio() {
+  try {
+      const value1 = document.getElementById("selectorValue1").value.toUpperCase();
+      const value2 = document.getElementById("selectorValue2").value.toUpperCase();
+      const cantidad = parseFloat(document.getElementById("number").value);
+
+      if (isNaN(cantidad) || cantidad <= 0) {
+          document.getElementById("result").textContent = "0";
+          return;
+      }
+
+      const respuesta = await fetch(`https://v6.exchangerate-api.com/v6/3aac3354aab9d55f5d183ccf/pair/${value1}/${value2}`);
+      console.log(respuesta);
+      
+      
+      const datos = await respuesta.json();
+      console.log(datos);
+
+      if (datos.result === "success") {
+          const tasaCambio = datos.conversion_rate;
+          console.log(`La tasa de cambio de ${value1} a ${value2} es: ${tasaCambio}`);
+
+          const resultado = cantidad * tasaCambio;
+          document.getElementById("result").textContent = resultado.toFixed(2);
+      } else {
+          console.error('Error al obtener la tasa de cambio:', datos);
+          document.getElementById("result").textContent = "Error";
+      }
+
+  } catch (error) {
+      console.error('Error al obtener la tasa de cambio:', error);
+      document.getElementById("result").textContent = "Error";
+  }
+}
+
+// Agregar eventos para actualizar la tasa de cambio al cambiar los selectores o el input
+document.getElementById("selectorValue1").addEventListener("change", obtenerTasaCambio);
+document.getElementById("selectorValue2").addEventListener("change", obtenerTasaCambio);
+document.getElementById("number").addEventListener("input", obtenerTasaCambio);
